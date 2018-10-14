@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.example.ayush.notifyapp.Model.Activity_Model;
 import com.example.ayush.notifyapp.Request.App_Request;
+import com.example.ayush.notifyapp.View.Activity_View;
 
 import java.util.List;
 
@@ -14,9 +15,9 @@ import java.util.List;
 public class Activity_Presenter implements App_Request.Presenter
 {
     private App_Request.Model mModel;
-    private View mView;
+    private Activity_View mView;
 
-    public Activity_Presenter(View view) {
+    public Activity_Presenter(Activity_View view) {
         mView = view;
         initPresenter();
     }
@@ -29,6 +30,6 @@ public class Activity_Presenter implements App_Request.Presenter
     @Override
     public void onClick(View view) {
         List<String> data = mModel.getData();
-        mView.set
+        mView.setViewData(data);
     }
 }

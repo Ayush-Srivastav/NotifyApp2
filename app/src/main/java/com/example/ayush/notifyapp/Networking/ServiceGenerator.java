@@ -17,7 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
 
     public static String API_BASE_URL = "https://www.kiet.edu/api/notification/index.php/";
-    public static String API_BASE_URL_ALTERNATE = "https://192.168.1.2/api/notification/index.php/";
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS)
             .connectTimeout(60, TimeUnit.SECONDS);
 
@@ -30,12 +29,6 @@ public class ServiceGenerator {
 
     public static <S> S createService(Class<S> serviceClass) {
         Retrofit retrofit = builder.client(httpClient.build()).build();
-        return retrofit.create(serviceClass);
-    }
-
-    public static <S> S fetch_ifsc(Class<S> serviceClass,String url) {
-        builder2=new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = builder2.client(httpClient.build()).build();
         return retrofit.create(serviceClass);
     }
 
@@ -62,33 +55,6 @@ public class ServiceGenerator {
         OkHttpClient client = httpClient.build();
         Retrofit retrofit = builder.client(client).build();
         return retrofit.create(serviceClass);
-    }
-    public static <S> S createService(Class<S> serviceClass, final String authToken) {
-        if (authToken != null) {
-            httpClient.addInterceptor(new Interceptor() {
-                @Override
-                public Response intercept(Interceptor.Chain chain) throws IOException {
-                    Request original = chain.request();
-                    Request.Builder requestBuilder = original.newBuilder()
-                            .header("bearer", authToken)
-                            .method(original.method(), original.body());
-
-                    Request request = requestBuilder.build();
-                    return chain.proceed(request);
-                }
-            });
-        }
-
-        OkHttpClient client = httpClient.build();
-        Retrofit retrofit = builder.client(client).build();
-        return retrofit.create(serviceClass);
-    }
-
-    public static void checkOnAlternativeUrl(){
-
-        String tmp = ServiceGenerator.API_BASE_URL_ALTERNATE;
-        ServiceGenerator.API_BASE_URL_ALTERNATE = ServiceGenerator.API_BASE_URL;
-        ServiceGenerator.API_BASE_URL = tmp;
     }
 
 }
