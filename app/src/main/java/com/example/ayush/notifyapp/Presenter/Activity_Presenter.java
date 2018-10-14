@@ -30,6 +30,8 @@ public class Activity_Presenter implements App_Request.Presenter
     @Override
     public void onClick(View view) {
         List<String> data = mModel.getData();
+
         mView.setViewData(data);
+
     }
 }

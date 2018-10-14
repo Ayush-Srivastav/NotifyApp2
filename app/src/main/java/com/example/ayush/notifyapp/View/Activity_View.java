@@ -11,12 +11,12 @@ import com.example.ayush.notifyapp.Presenter.Activity_Presenter;
 import com.example.ayush.notifyapp.R;
 import com.example.ayush.notifyapp.Request.App_Request;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Activity_View extends AppCompatActivity {
+public class Activity_View extends AppCompatActivity implements App_Request.View {
 
-    EditText et_title , et_message , et_goToLink ;
-    String title ="" , message="" , goToLink = "";
+    public EditText et_title , et_message , et_goToLink ;
     Spinner select;
     Button submit;
     private App_Request.Presenter mPresenter;
@@ -45,7 +45,8 @@ public class Activity_View extends AppCompatActivity {
     }
 
     public void setViewData(List<String> data) {
-
+        et_title.setVisibility(View.GONE);
+        et_message.setVisibility(View.GONE);
     }
 
 }
